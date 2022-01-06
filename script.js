@@ -20,6 +20,15 @@ function renderOneDrink(drink){
     div.appendChild(p);
     div.appendChild(btn);
 
+    document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseover', function(e){
+        e.target.style.cursor = 'pointer';
+        e.target.style.opacity = 0.7;
+    }));
+
+    document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseout', function(e){
+        e.target.style.opacity = 1;
+    }));
+
 }
 
 function getDrinks(alcohol){
@@ -34,7 +43,12 @@ function getDrinks(alcohol){
 }
 
 document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseover', function(e){
-    e.target.style.cursor = 'pointer'
+    e.target.style.cursor = 'pointer';
+    e.target.style.opacity = 0.7;
+}));
+
+document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseout', function(e){
+    e.target.style.opacity = 1;
 }));
 
 document.querySelectorAll('button').forEach(btn => btn.addEventListener('click', function(e){
