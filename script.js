@@ -6,19 +6,18 @@ function renderOneDrink(drink){
     div.classList.add('drinkCard');
     const img = document.createElement('img');
     img.classList.add('drinkImages');
-    const p = document.createElement('p');
-    p.textContent = drink.strDrink;
+    const h3 = document.createElement('h3');
+    h3.textContent = drink.strDrink;
     img.src = drink.strDrinkThumb;
     const btn = document.createElement('button');
-    btn.classList.add('likeBtns')
-    btn.textContent = 'Learn to make'
+    btn.classList.add('drinkButtons')
 
     grabDrinkInfo.appendChild(div);
     div.appendChild(img);
     img.width = 200;
     img.height = 200;
-    div.appendChild(p);
-    div.appendChild(btn);
+    div.appendChild(h3);
+    div.appendChild(btn).textContent = 'Make it';
 
     btn.addEventListener('click', function(e){
         let parentId = e.target.parentNode.id;
@@ -26,11 +25,32 @@ function renderOneDrink(drink){
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${parentId}`)
         .then(res => res.json())
         .then(data => {
-            let drinksList = data.drinks;
+            let drinksObject = data.drinks[0];
+            let drinksArray = Object.entries(drinksObject);
+
             const p = document.createElement('p');
-            for (key of drinksList)
-            document.getElementById(key.idDrink).appendChild(p)
-            p.textContent = key.strInstructions
+            document.getElementById(drinksArray[0][1]).appendChild(p);
+            p.textContent = drinksArray[9][1];
+
+            const ol = document.createElement('ol');
+            document.getElementById(drinksArray[0][1]).appendChild(ol);
+
+            for (array of drinksArray){
+                if (array[0].charAt(3) === 'M' && array[1] != null){
+                    console.log(array[1])
+                }
+            }
+
+            for (array of drinksArray){
+                if (array[0].charAt(6) === 'r' && array[1] != null){
+                    console.log(array[1])
+                }
+            }
+
+            function createList(measurement){
+                li.testContent = measurement;
+                ol.append(li)
+            }
         })
     })
 
@@ -45,13 +65,6 @@ function renderOneDrink(drink){
 
 }
 
-
-// function makeDrink(drink){
-//     const id = drink.idDrink;
-//     const p = document.createElement('p');
-//     p.textContent = drink.strDrink;
-    
-// }
 
 function getDrinks(alcohol){
     const grabDrinkInfo = document.querySelector('#drink-info');
