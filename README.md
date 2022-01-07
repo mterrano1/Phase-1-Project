@@ -14,6 +14,8 @@ This website was created to help all of the other frustrated Coding Bootcamp Stu
 -Click on the button to see the ingredients and instructions to make it
 -Finally, Enjoy!
 
+https://media.giphy.com/media/m2GGSFCCmTWRxycWUq/giphy.gif
+
 
 Acknowledgments:
 
