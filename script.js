@@ -22,7 +22,7 @@ function renderOneDrink(drink){
 
     btn.addEventListener('click', function(e){
         let parentId = e.target.parentNode.id;
-        // clearPage(e.target.parentNode);
+        if (btn.innerText === 'Make it') {
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${parentId}`)
         .then(res => res.json())
         .then(data => {
@@ -38,10 +38,12 @@ function renderOneDrink(drink){
 
             let ingArray = [];
             let measArray = [];
+            let testArray = [];
 
             for (array of drinksArray){
                 if (array[0].charAt(6) === 'r' && array[1] != null){
                     ingArray.push(array[1]);
+                    testArray.push(array[1]);
                 }
                 else if
                     (array[0].charAt(3) === 'M' && array[1] != null){
@@ -49,12 +51,11 @@ function renderOneDrink(drink){
                 }
             }
 
-            for (let i = 0; i < ingArray.length; ++i){
+            for (let i = 0; i <= testArray.length - 1; ++i){
                 const li = document.createElement('li');
-                const copyIngArray = [...ingArray];
 
                 li.textContent = measArray.shift();
-                li.textContent += ' of' + ' ' + copyIngArray.shift();
+                li.textContent += ' of' + ' ' + ingArray.shift();
                 ul.append(li)
             }
 
@@ -62,7 +63,16 @@ function renderOneDrink(drink){
             document.getElementById(drinksArray[0][1]).appendChild(p);
             p.textContent = drinksArray[9][1];
 
+            btn.innerText = 'Clear'
         })
+        }
+        else {
+            let btnParent = btn.parentElement;
+            while (btnParent.children.length > 3) {
+                btnParent.removeChild(btnParent.lastChild)
+            }
+            btn.innerText = 'Make it'
+        }
     })
 
     document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseover', function(e){
@@ -99,7 +109,7 @@ document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseou
 
 document.querySelectorAll('button').forEach(btn => btn.addEventListener('click', function(e){
     let buttonText = e.target.innerText;
-    getDrinks(buttonText)
+    getDrinks(buttonText);
 }))
 
 function clearPage(parent){
