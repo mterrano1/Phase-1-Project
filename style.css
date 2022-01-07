@@ -6,16 +6,6 @@
     align-items: center
 }
 
-/* #drink-bar span {
-    height: 80%;
-    width: 8vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2em;
-    border: 1px solid #F4976C
-} */
-
 .alcohol {
     height: 60%;
     width: 8vw;
@@ -30,7 +20,6 @@
 }
 
 #drink-list {
-    /* height: 75vh; */
     padding: 1rem;
     text-align: center;
     background: #BC4639;
@@ -57,10 +46,15 @@
     align-items: center;
 }
 
-.likeBtns {
+.drinkButtons {
     background: #4285F4;
     color: #F3E0DC;
     border-radius: 1em;
     text-decoration: none;
     border: 3px solid #F3E0DC;
+    margin: 1rem;
+}
+
+li {
+    text-align: left;
 }
