@@ -1,31 +1,27 @@
 
 //Render drink function
 function renderOneDrink(drink){
-    //Creating elements and tags
-    const grabDrinkInfo = document.querySelector('#drink-info');
     const div = document.createElement('div');
     div.id = drink.idDrink;
     div.classList.add('drinkCard');
+    document.querySelector('#drink-info').appendChild(div);
 
     const img = document.createElement('img');
     img.classList.add('drinkImages');
     img.src = drink.strDrinkThumb;
-
-    const h3 = document.createElement('h3');
-    const btn = document.createElement('button');
-    btn.classList.add('drinkButtons')
-
-    grabDrinkInfo.appendChild(div);
     div.appendChild(img);
     img.width = 200;
     img.height = 200;
-    div.appendChild(h3).textContent = drink.strDrink;;
-    div.appendChild(btn).textContent = 'Make it';
 
+    const h3 = document.createElement('h3');
+    div.appendChild(h3).textContent = drink.strDrink;
+
+    const btn = document.createElement('button');
+    btn.classList.add('drinkButtons')
+    div.appendChild(btn).textContent = 'Make it';
     buttonFetch(btn);
     btnCursorHover();
     btnCursorReset();
-
 }
 
 //Function will fetch details of the drink using the ID of the parent node
@@ -36,8 +32,7 @@ function fetchDrinkDetails(parentId){
 }
 
 function renderDrinkDetails(data){
-
-    //Grabbing all key-value pairs and adding them to seperate arrays together
+    //Grabbing all key-value pairs and adding them to new arrays
     let drinksObject = data.drinks[0];
     let drinksArray = Object.entries(drinksObject);
     let ingArray = [];
