@@ -1,4 +1,16 @@
 
+//Fetch request to grab all drinks specified by alcohol type in parameter
+function getDrinks(alcohol){
+    const grabDrinkInfo = document.querySelector('#drink-info');
+    clearPage(grabDrinkInfo);
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${alcohol}`)
+    .then(res => res.json())
+    .then(data => {
+        let drinksList = data.drinks
+        drinksList.forEach(drink => renderOneDrink(drink))
+    })
+}
+
 //Render drink function
 function renderOneDrink(drink){
     const div = document.createElement('div');
@@ -68,7 +80,7 @@ function drinkDetailIteration(drinksArray, ingArray, measArray, testArray){
     document.getElementById(drinksArray[0][1]).appendChild(ul);
 
     //Creating for loop to iterate through ingredients and measurements
-    //testArray is an empty array that I'm just using to get length of ingredients and measurements
+    //testArray's purpose is just to get the length of ingredient and measurement array's
     for (let i = 0; i <= testArray.length - 1; ++i){
         const li = document.createElement('li');
         //Adding measurements to each list followed by ' of ingredients' and appending to ul
@@ -80,19 +92,6 @@ function drinkDetailIteration(drinksArray, ingArray, measArray, testArray){
     const p = document.createElement('p');
     document.getElementById(drinksArray[0][1]).appendChild(p);
     p.textContent = drinksArray[9][1];
-}
-
-
-//Fetch request to grab all drinks specified by alcohol type in parameter
-function getDrinks(alcohol){
-    const grabDrinkInfo = document.querySelector('#drink-info');
-    clearPage(grabDrinkInfo);
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${alcohol}`)
-    .then(res => res.json())
-    .then(data => {
-        let drinksList = data.drinks
-        drinksList.forEach(drink => renderOneDrink(drink))
-    })
 }
 
 //Event listener to change cursor on hover
