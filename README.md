@@ -5,6 +5,8 @@ Introduction
 
 Welcome to the very first project of my new software development career! I started a Coding Bootcamp two months ago and this creation respresents much of what I have learned in the past two months. I have a very limited background with computers so the past couple months have been both challenging and exciting. There are moments when I feel on top of the world, and moments when I feel like throwing my computer across the room and grabbing a drink. This project helps me with the latter. :)
 
+Feel free to check out my blog for more information about this project: https://medium.com/@mterrano1/my-first-coding-project-fetch-an-api-662d08c3f47e
+
 
 
 Description
