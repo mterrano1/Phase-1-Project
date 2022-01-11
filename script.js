@@ -1,4 +1,10 @@
 
+//Event listener to fetch drinks organized by the alcohol name on button
+document.querySelectorAll('button').forEach(btn => btn.addEventListener('click', function(e){
+    let buttonText = e.target.innerText;
+    getDrinks(buttonText);
+}))
+
 //Fetch request to grab all drinks specified by alcohol type in parameter
 function getDrinks(alcohol){
     const grabDrinkInfo = document.querySelector('#drink-info');
@@ -31,9 +37,46 @@ function renderOneDrink(drink){
     const btn = document.createElement('button');
     btn.classList.add('drinkButtons')
     div.appendChild(btn).textContent = 'Make it';
-    buttonFetch(btn);
     btnCursorHover();
     btnCursorReset();
+    buttonFetch(btn);
+}
+
+//Event listener to change cursor on hover
+function btnCursorHover(){
+    document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseover', function(e){
+        e.target.style.cursor = 'pointer';
+        e.target.style.opacity = 0.7;
+    }));
+}
+btnCursorHover()
+
+//Event listener to fade button color on hover
+function btnCursorReset(){
+    document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseout', function(e){
+        e.target.style.opacity = 1;
+    }));
+}
+btnCursorReset()
+
+//Function to add event listener to drink details button that will fetch drink details if conditions are met
+function buttonFetch(btn){
+    btn.addEventListener('click', (e) => {
+        let parentId = e.target.parentNode.id;
+        if (btn.innerText === 'Make it'){
+        fetchDrinkDetails(parentId);
+        //Change button innertext to 'clear' so function can't be repeated
+        btn.innerText = 'Clear'    
+        }
+        else {
+            let btnParent = btn.parentElement;
+            while (btnParent.children.length > 3){
+                btnParent.removeChild(btnParent.lastChild)
+            }
+            //Change name of button back to 'Make it' so it can be clicked on again and have same functionality
+            btn.innerText = 'Make it'
+        }
+    })
 }
 
 //Function will fetch details of the drink using the ID of the parent node
@@ -92,49 +135,6 @@ function drinkDetailIteration(drinksArray, ingArray, measArray, testArray){
     const p = document.createElement('p');
     document.getElementById(drinksArray[0][1]).appendChild(p);
     p.textContent = drinksArray[9][1];
-}
-
-//Event listener to change cursor on hover
-function btnCursorHover(){
-    document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseover', function(e){
-        e.target.style.cursor = 'pointer';
-        e.target.style.opacity = 0.7;
-    }));
-}
-btnCursorHover()
-
-//Event listener to fade button color on hover
-function btnCursorReset(){
-    document.querySelectorAll('button').forEach(btn => btn.addEventListener('mouseout', function(e){
-        e.target.style.opacity = 1;
-    }));
-}
-btnCursorReset()
-
-//Event listener to fetch drinks organized by the alcohol name on button
-document.querySelectorAll('button').forEach(btn => btn.addEventListener('click', function(e){
-    let buttonText = e.target.innerText;
-    getDrinks(buttonText);
-}))
-
-//Function to add event listener to drink details button that will fetch drink details if conditions are met
-function buttonFetch(btn){
-    btn.addEventListener('click', (e) => {
-        let parentId = e.target.parentNode.id;
-        if (btn.innerText === 'Make it'){
-        fetchDrinkDetails(parentId);
-        //Change button innertext to 'clear' so function can't be repeated
-        btn.innerText = 'Clear'    
-        }
-        else {
-            let btnParent = btn.parentElement;
-            while (btnParent.children.length > 3){
-                btnParent.removeChild(btnParent.lastChild)
-            }
-            //Change name of button back to 'Make it' so it can be clicked on again and have same functionality
-            btn.innerText = 'Make it'
-        }
-    })
 }
 
 //Function to clear 'drink-list' div every time a new alcohol is selected
